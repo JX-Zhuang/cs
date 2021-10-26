@@ -62,7 +62,13 @@ practice19(){
 }
 // 练习 1-10
 practice110(){
-
+    int c;
+    while((c = getchar())!=EOF){
+        if(c == '\t') printf("\\t");
+        if(c=='\b') printf("\\b");
+        if(c=='\\') printf("\\\\");
+        if(c!='\t'&&c!='\b'&&c!='\\') putchar(c);
+    }
 }
 main(){
     // main1();
