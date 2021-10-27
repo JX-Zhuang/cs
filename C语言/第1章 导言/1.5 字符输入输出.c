@@ -1,5 +1,7 @@
 // 1.5.1 文件复制
 #include <stdio.h>
+#define IN 1
+#define OUT 0
 main1(){
     int c;
     while((c = getchar())!=EOF){
@@ -68,6 +70,15 @@ practice110(){
         if(c=='\b') printf("\\b");
         if(c=='\\') printf("\\\\");
         if(c!='\t'&&c!='\b'&&c!='\\') putchar(c);
+    }
+}
+// 1.5.4 单词计数
+main4(){
+    int c ,nl,nw,nc,state;
+    state = OUT;
+    nl = nw = nc = 0;
+    while((c=getchar())!=EOF){
+        ++nc;
     }
 }
 main(){
