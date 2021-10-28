@@ -79,7 +79,15 @@ main4(){
     nl = nw = nc = 0;
     while((c=getchar())!=EOF){
         ++nc;
+        if(c=='\n') ++nl;
+        if(c==' '||c=='\n'||c=='\t'){
+            state = OUT;
+        }else if(state == OUT){
+            ++nw;
+            state = IN;
+        }
     }
+    printf("%d %d %d\n",nl,nw,nc);
 }
 main(){
     // main1();
@@ -89,5 +97,6 @@ main(){
     // main3();
     // practice18();
     // practice19();
-    practice110();
+    // practice110();
+    main4();
 }
