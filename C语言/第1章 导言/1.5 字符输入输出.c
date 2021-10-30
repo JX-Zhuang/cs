@@ -89,6 +89,24 @@ main4(){
     }
     printf("%d %d %d\n",nl,nw,nc);
 }
+// 练习 1-12
+practice112(){
+    int c,state;
+    state = OUT;
+    while((c=getchar())!=EOF){
+        if(c==' '||c=='\n'||c=='\t'){
+            if(state==IN){
+                putchar('\n');
+                state = OUT;
+            }
+        }else if(state == OUT){
+            state = IN;
+            putchar(c);
+        }else{
+            putchar(c);
+        }
+    }
+}
 main(){
     // main1();
     // practice16();
@@ -98,5 +116,6 @@ main(){
     // practice18();
     // practice19();
     // practice110();
-    main4();
+    // main4();
+   practice112();
 }
