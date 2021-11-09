@@ -118,7 +118,7 @@ practice113Horizontal()
 }
 practice113Vertical()
 {
-    int c, nc, i, state;
+    int c, nc, i, j, state;
     int maxvalue, ovflow, len;
     int wl[MAXWORD];
     len = nc = ovflow = 0;
@@ -150,23 +150,23 @@ practice113Vertical()
     for (i = 1; i < MAXWORD; ++i)
         if (wl[i] > maxvalue)
             maxvalue = wl[i];
-    for (i = 1; i < MAXWORD; ++i)
+    for (i = MAXHIST; i > 0; --i)
     {
-        printf("%5d - %5d : ", i, wl[i]);
-        if (wl[i] > 0)
+        for (j = 1; j < MAXWORD; ++j)
         {
-            if ((len = wl[i] * MAXHIST / maxvalue) <= 0)
-                len = 1;
-        }
-        else
-            len = 0;
-        while (len > 0)
-        {
-            putchar('*');
-            --len;
+            if (wl[j] * MAXHIST / maxvalue >= i)
+                printf(" * ");
+            else
+                printf("  ");
         }
         putchar('\n');
     }
+    for (i = 1; i < MAXWORD; ++i)
+        printf("%2d ", i);
+    putchar('\n');
+    for (i = 1; i < MAXWORD; ++i)
+        printf("%2d ", wl[i]);
+    putchar('\n');
     if (ovflow > 0)
         printf("There are %d words >= %d\n", ovflow, MAXWORD);
 }
