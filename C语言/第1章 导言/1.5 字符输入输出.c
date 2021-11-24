@@ -1,5 +1,7 @@
 // 1.5.1 文件复制
 #include <stdio.h>
+#define IN 1
+#define OUT 0
 main1(){
     int c;
     while((c = getchar())!=EOF){
@@ -62,7 +64,48 @@ practice19(){
 }
 // 练习 1-10
 practice110(){
-
+    int c;
+    while((c = getchar())!=EOF){
+        if(c == '\t') printf("\\t");
+        if(c=='\b') printf("\\b");
+        if(c=='\\') printf("\\\\");
+        if(c!='\t'&&c!='\b'&&c!='\\') putchar(c);
+    }
+}
+// 1.5.4 单词计数
+main4(){
+    int c ,nl,nw,nc,state;
+    state = OUT;
+    nl = nw = nc = 0;
+    while((c=getchar())!=EOF){
+        ++nc;
+        if(c=='\n') ++nl;
+        if(c==' '||c=='\n'||c=='\t'){
+            state = OUT;
+        }else if(state == OUT){
+            ++nw;
+            state = IN;
+        }
+    }
+    printf("%d %d %d\n",nl,nw,nc);
+}
+// 练习 1-12
+practice112(){
+    int c,state;
+    state = OUT;
+    while((c=getchar())!=EOF){
+        if(c==' '||c=='\n'||c=='\t'){
+            if(state==IN){
+                putchar('\n');
+                state = OUT;
+            }
+        }else if(state == OUT){
+            state = IN;
+            putchar(c);
+        }else{
+            putchar(c);
+        }
+    }
 }
 main(){
     // main1();
@@ -72,5 +115,7 @@ main(){
     // main3();
     // practice18();
     // practice19();
-    practice110();
+    // practice110();
+    // main4();
+   practice112();
 }
