@@ -1,9 +1,10 @@
 #include <stdio.h>
-#include <string.h>
-int main() {
-    char s1[] = "abc";
-    char s2[] = "abc ";
-    printf("%d\n",strcmp(s1,s2));
-    printf("%ld\n",s1-s2);
+int main()
+{
+    int x = 5342;
+    int *p = NULL;
+    p = &x;
+    printf("x:%d\n", x);
+    printf("p:%p\n*p:%d\n", p, *p);
     return 0;
 }
