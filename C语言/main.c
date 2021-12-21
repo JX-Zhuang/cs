@@ -1,10 +1,21 @@
 #include <stdio.h>
 int main()
 {
-    int x = 5342;
-    int *p = NULL;
-    p = &x;
-    printf("x:%d\n", x);
-    printf("p:%p\n*p:%d\n", p, *p);
+    int n;
+    char *arr[] = {
+        "Jan",
+        "Feb",
+        "March",
+        "Apr",
+        "May",
+        "June",
+        "July",
+        "Auguse",
+        "September",
+        "Oct",
+        "Nov",
+        "Dec"};
+    scanf("%d", &n);
+    printf("%s\n", arr[n - 1]);
     return 0;
 }
