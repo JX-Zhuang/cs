@@ -10,17 +10,16 @@ void swap(char **s1, char **s2)
 int main()
 {
     int l = 5;
-    char *arr[l];
-    int i = 0;
-    while (i < l)
+    char arr[l][80];
+    for (int i = 0; i < l; i++)
     {
-        scanf("%s", &arr[i++]);
+        scanf("%s", &arr[i]);
     }
     for (int i = 0; i < l; i++)
     {
         for (int j = 0; j < l; j++)
         {
-            if (strcmp(arr[i], arr[j]) > 0)
+            if (strcmp(arr[i], arr[j]) < 0)
             {
                 swap(&arr[i], &arr[j]);
             }
