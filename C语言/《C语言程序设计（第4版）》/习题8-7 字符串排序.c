@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 void swap(char **s1, char **s2)
 {
@@ -6,27 +7,27 @@ void swap(char **s1, char **s2)
     *s1 = *s2;
     *s2 = temp;
 }
-
 int main()
 {
-    int l = 5;
-    char arr[l][80];
+    int l = 5, max = 80;
+    char *arr[5];
     for (int i = 0; i < l; i++)
     {
-        scanf("%s", &arr[i]);
+        arr[i] = malloc(max * sizeof(char));
+        scanf("%s", arr[i]);
     }
     for (int i = 0; i < l; i++)
     {
-        for (int j = 0; j < l; j++)
+        for (int j = 0; j < l - 1; j++)
         {
-            if (strcmp(arr[i], arr[j]) < 0)
+            if (strcmp(arr[j], arr[j + 1]) > 0)
             {
-                swap(&arr[i], &arr[j]);
+                swap(&arr[j], &arr[j + 1]);
             }
         }
     }
     printf("After sorted:\n");
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < l; i++)
     {
         printf("%s\n", arr[i]);
     }
