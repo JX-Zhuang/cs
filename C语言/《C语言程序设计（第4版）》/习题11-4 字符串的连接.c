@@ -18,3 +18,16 @@ int main()
 }
 
 /* 你的代码将被嵌在这里 */
+char *str_cat(char *s, char *t)
+{
+    char *temp = s;
+    while (*(++temp) != '\0');
+    while (*t != '\0')
+    {
+        *temp = *t;
+        temp++;
+        t++;
+    }
+
+    return s;
+}
