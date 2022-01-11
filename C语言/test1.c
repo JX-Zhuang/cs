@@ -1,20 +1,25 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 void strcopy(char *s, char *t);
+void printStr(char *s);
 int main()
 {
     char *str1 = "hello world!";
-    char *str2 = "";
+    char *str2 = (char *)malloc(strlen(str1) + 1);
     strcopy(str2, str1);
-    printf("%c\n", *str1);
-    printf("%c\n", *str2);
+    printStr(str2);
     return 0;
 }
 void strcopy(char *s, char *t)
 {
-    while ((*s = *t) != '\0')
+    while ((*s++ = *t++) != '\0')
+        ;
+}
+void printStr(char *s)
+{
+    while (*s)
     {
-        s++;
-        t++;
+        printf("%c", *s++);
     }
 }
