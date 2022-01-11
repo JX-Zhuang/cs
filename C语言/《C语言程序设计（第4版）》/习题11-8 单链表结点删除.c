@@ -60,6 +60,7 @@ struct ListNode *deletem(struct ListNode *L, int m)
     {
         if (p->data == m)
         {
+            free(tail->next);
             tail->next = p->next;
         }
         else
@@ -68,6 +69,9 @@ struct ListNode *deletem(struct ListNode *L, int m)
         }
         p = p->next;
     }
-    return head->next;
+    L = head->next;
+    head->next = NULL;
+    free(tail);
+    return L;
 }
 /* 你的代码将被嵌在这里 */
