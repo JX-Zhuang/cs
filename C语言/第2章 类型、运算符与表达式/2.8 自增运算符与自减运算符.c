@@ -56,3 +56,38 @@
 //     }
 //     s1[j] = '\0';
 // }
+
+int any(char s1[], char s2[]);
+int main()
+{
+    {
+        char s1[] = "abcdecf",
+             s2[] = "ghc";
+        printf("%d\n", any(s1, s2));
+    }
+    {
+        char s1[] = "abcdecf",
+             s2[] = "g";
+        printf("%d\n", any(s1, s2));
+    }
+    {
+        char s1[] = "abcdecf",
+             s2[] = "a";
+        printf("%d\n", any(s1, s2));
+    }
+}
+int any(char s1[], char s2[])
+{
+    int i = 0, j;
+    while (s1[i] != '\0')
+    {
+        j = 0;
+        while (s2[j] != '\0')
+        {
+            if (s1[i] == s2[j++])
+                return i;
+        }
+        i++;
+    }
+    return -1;
+}
