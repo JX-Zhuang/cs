@@ -7,10 +7,16 @@ unsigned setbits(unsigned x, int p, int n, unsigned y)
 {
     return (x & ~(~(~0 << n) << (p + 1 - n))) | (y & ~(~0 << n)) << (p + 1 - n);
 }
+unsigned invert(unsigned x, int p, int n)
+{
+    int bits = (x >> (p + 1 - n)) & (~(~0 << n));
+    return (x ^ (bits << (p + 1 - n)) ^ (0)) | (~(bits | (~0 << n)) << (p + 1 - n));
+}
 int main()
 {
     int x = 0b10010101;
     int y = 0b11110011;
     printf("%u\n", getbits(x, 4, 3));
     printf("%u\n", setbits(x, 4, 3, y));
+    printf("%u\n", invert(x, 4, 3));
 }
