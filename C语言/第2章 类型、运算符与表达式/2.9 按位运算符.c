@@ -9,8 +9,9 @@ unsigned setbits(unsigned x, int p, int n, unsigned y)
 }
 unsigned invert(unsigned x, int p, int n)
 {
-    int bits = (x >> (p + 1 - n)) & (~(~0 << n));
-    return (x ^ (bits << (p + 1 - n)) ^ (0)) | (~(bits | (~0 << n)) << (p + 1 - n));
+    // int bits = (x >> (p + 1 - n)) & (~(~0 << n));
+    // return (x ^ (bits << (p + 1 - n)) ^ (0)) | (~(bits | (~0 << n)) << (p + 1 - n));
+    return x ^ (~(~0 << n) << (p + 1 - n));
 }
 int main()
 {
