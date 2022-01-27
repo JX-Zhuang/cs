@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 void strcpyArr(char *s, char *t)
 {
     int i = 0;
@@ -36,18 +37,47 @@ void strcatP(char *s, char *t)
 {
     while (*s)
         s++;
-    while (*s++ = *t++){
+    while (*s++ = *t++)
+    {
         printf("x\n");
     }
 }
+int strend(char *s, char *t)
+{
+    int lenS = strlen(s), lenT = strlen(t);
+    if (lenS < lenT)
+        return 0;
+    s = s + lenS - lenT;
+    while (*s++ == *t++ && *s != '\0')
+        ;
+    return *s == '\0' && *t == '\0' ? 1 : 0;
+}
+void *myStrncpy(char *s, char *t, int n)
+{
+    while (*t && n-- > 0)
+        *s++ = *t++;
+    while (n-- > 0)
+        *s++ = '\0';
+}
+void *myStrncat(char *s, char *t, int n)
+{
+    while (*s)
+        s++;
+    myStrncpy(s, t, n);
+}
+int myStrncmp(char *s, char *t, int n)
+{
+    for (; *s == *t; s++, t++)
+    {
+        if (*s == '\0' || --n <= 0)
+            return 0;
+    }
+
+    return *s - *t;
+}
 int main()
 {
-    char *s = (char *)malloc(100);
-    char *t = "abc";
-    char *t2 = "defg";
-    strcatP(s, t);
-    strcatP(s, t2);
-    printf("s = %s\n", s);
-    printf("t = %s\n", t);
+    char *s1 = "abcd", *t1 = "abcdefghijklmn";
+    printf("%d\n", myStrncmp(s1, t1, 5));
     return 0;
 }
