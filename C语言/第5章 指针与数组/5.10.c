@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
 #define MAXLINE 1000
+#define LINES 100
 int myGetline(char s[], int lim)
 {
     int i = 0, c;
@@ -77,7 +80,38 @@ int find(int argc, char *argv[])
     }
     return found;
 }
+int tail(int argc, char *argv[])
+{
+    char line[MAXLINE];
+    char *lineptr[LINES];
+    int n = 10, c, m = 0, flag = 0, i = 0, last = 0, len;
+    if (--argc > 0 && (*++argv)[0] == '-')
+    {
+        while (isdigit(c = *++argv[0]))
+        {
+            m = c - '0' + m * 10;
+            flag = 1;
+        }
+        if (flag)
+            n = m;
+    }
+    while ((len = myGetline(line, MAXLINE)) > 0)
+    {
+        lineptr[last] = (char *)malloc(len);
+        strcpy(lineptr[last], line);
+        last++;
+    }
+    if (last > n)
+    {
+        i = last - n;
+    }
+    for (; i < last; i++)
+    {
+        printf("%s", lineptr[i]);
+    }
+    return 0;
+}
 int main(int argc, char *argv[])
 {
-    return find(argc, argv);
+    return tail(argc, argv);
 }
