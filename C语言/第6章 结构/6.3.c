@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#define NKEYS 4
+#define NKEYS (sizeof keytab / sizeof keytab[0])
 struct key
 {
     char *word;
