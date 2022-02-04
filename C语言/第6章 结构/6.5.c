@@ -11,7 +11,7 @@ struct tnode
 };
 void printTNode(struct tnode *node)
 {
-    if (!node)
+    if (node == NULL)
         return;
     printTNode(node->left);
     printf("word:%s,count:%d\n", node->word, node->count);
@@ -19,36 +19,33 @@ void printTNode(struct tnode *node)
 }
 struct tnode *createNode()
 {
-    return malloc(sizeof(struct tnode));
+    return (struct tnode *)malloc(sizeof(struct tnode));
 }
 struct tnode *addNode(struct tnode *node, char *word)
 {
-    if (!node)
+    int cond;
+    if (node == NULL)
     {
-        struct tnode *newNode = createNode();
-        newNode->word = word;
-        newNode->count = 1;
-        newNode->left = NULL;
-        newNode->right = NULL;
-        return newNode;
+        node = createNode();
+        node->word = word;
+        node->count = 1;
+        node->left = node->right = NULL;
     }
-    int c = strcmp(node->word, word);
-    if (c > 0)
-        node->right = addNode(node->right, word);
-    else if (c < 0)
-        node->left = addNode(node->left, word);
-    else
+    else if ((cond = strcmp(word, node->word)) == 0)
         node->count++;
+    else if (cond > 0)
+        node->right = addNode(node->right, word);
+    else
+        node->left = addNode(node->left, word);
     return node;
 }
 int main()
 {
     char *test[] = {"auto", "void", "void", "while", "hello", "while", "break"};
-    char *p = test;
-    struct tnode *root;
-    while (p)
+    struct tnode *root = NULL;
+    for (int i = 0; i < sizeof(test) / sizeof(test[0]); i++)
     {
-        addNode(root, p++);
+        root = addNode(root, test[i]);
     }
     printTNode(root);
     return 0;
