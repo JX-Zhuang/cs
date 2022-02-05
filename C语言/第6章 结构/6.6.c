@@ -44,3 +44,24 @@ struct nlist *install(char *name, char *defn)
         return NULL;
     return np;
 }
+void undef(char *s)
+{
+    unsigned hashval = hash(s);
+    struct nlist *prev = NULL, *np;
+    for (np = hashtab[hashval]; np != NULL; np = np->next)
+    {
+        if (strcmp(s, np->name) == 0)
+            break;
+        prev = np;
+    }
+    if (np != NULL)
+    {
+        if (prev == NULL)
+            hashtab[hashval] = np->next;
+        else
+            prev->next = np->next;
+        free(np->name);
+        free(np->defn);
+        free(np);
+    }
+}
