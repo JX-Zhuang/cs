@@ -41,14 +41,14 @@ Position FindPrevious(ElementType X, List L)
 }
 void Insert(ElementType X, List L, Position P)
 {
-    Position Node = malloc(sizeof(Node));
-    if (Node == NULL)
+    Position Tmp = malloc(sizeof(struct Node));
+    if (Tmp == NULL)
     {
         //error
     }
-    Node->Element = X;
-    Node->Next = P->Next;
-    P->Next = Node;
+    Tmp->Element = X;
+    Tmp->Next = P->Next;
+    P->Next = Tmp;
 }
 void DeleteList(List L)
 {
@@ -60,4 +60,41 @@ void DeleteList(List L)
         free(P);
         P = Tmp;
     }
+}
+void PrintList(List L)
+{
+    Position P = L->Next;
+    while (P != NULL)
+    {
+        printf("List Node Element:%d\n", P->Element);
+        P = P->Next;
+    }
+}
+List MakeEmpty(List L)
+{
+    if (L != NULL)
+    {
+        DeleteList(L);
+    }
+    L = (List)malloc(sizeof(struct Node));
+    L->Next = NULL;
+    return L;
+}
+int main()
+{
+    List L = MakeEmpty(NULL);
+    Insert(1, L, L);
+    Insert(2, L, L);
+    Insert(3, L, L);
+    Insert(4, L, L);
+    Insert(5, L, L);
+    Delete(3, L);
+    PrintList(L);
+    Position P = Find(2, L);
+    if (P != NULL)
+    {
+        P->Element = 222;
+    }
+    PrintList(L);
+    return 0;
 }
