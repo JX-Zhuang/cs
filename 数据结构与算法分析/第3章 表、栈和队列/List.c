@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "List.h"
+#include <string.h>
 struct Node
 {
     ElementType Element;
@@ -48,4 +49,15 @@ void Insert(ElementType X, List L, Position P)
     Node->Element = X;
     Node->Next = P->Next;
     P->Next = Node;
+}
+void DeleteList(List L)
+{
+    Position P = L->Next, Tmp;
+    L->Next = NULL;
+    while (P != NULL)
+    {
+        Tmp = P->Next;
+        free(P);
+        P = Tmp;
+    }
 }
