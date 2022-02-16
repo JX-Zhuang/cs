@@ -27,6 +27,15 @@ void AddPolynomial(const Polynomial P1, const Polynomial P2, Polynomial PolySum)
         PolySum->CoeffArray[i] = P1->CoeffArray[i] + P2->CoeffArray[i];
     }
 }
+void MultPolynomial(const Polynomial P1, const Polynomial P2, Polynomial PolyMult)
+{
+    int i = P1->HighPower, j;
+    ZeroPolynomial(PolyMult);
+    PolyMult->HighPower = P1->HighPower + P2->HighPower;
+    for (; i >= 0; i--)
+        for (j = P2->HighPower; j >= 0; j--)
+            PolyMult->CoeffArray[i + j] += P1->CoeffArray[i] * P2->CoeffArray[j];
+}
 void PrintPolynomial(Polynomial P)
 {
     int i = P->HighPower;
@@ -61,8 +70,10 @@ int main()
     P2->CoeffArray[5] = 3;
     P2->CoeffArray[3] = 2;
     P2->CoeffArray[2] = 1;
-    Polynomial PSum = malloc(sizeof(struct P));
+    Polynomial PSum = malloc(sizeof(struct P)), PMult = malloc(sizeof(struct P));
     AddPolynomial(P1, P2, PSum);
     PrintPolynomial(PSum);
+    MultPolynomial(P1, P2, PMult);
+    PrintPolynomial(PMult);
     return 0;
 }
