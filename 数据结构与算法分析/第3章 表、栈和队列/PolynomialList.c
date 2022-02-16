@@ -62,10 +62,10 @@ Polynomial AddPolynomial(Polynomial P1, Polynomial P2)
     }
     return PolySum;
 }
-void Insert(Polynomial Header, Polynomial P)
+void Insert(Polynomial Poly, Polynomial P)
 {
-    P->Next = Header->Next;
-    Header->Next = P;
+    P->Next = Poly->Next;
+    Poly->Next = P;
 }
 void MultPolynomial(const Polynomial P1, const Polynomial P2, Polynomial PolyMult)
 {
