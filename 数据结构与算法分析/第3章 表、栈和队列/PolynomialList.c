@@ -67,12 +67,94 @@ void Insert(Polynomial Poly, Polynomial P)
     P->Next = Poly->Next;
     Poly->Next = P;
 }
-void MultPolynomial(Polynomial P1, Polynomial P2)
+void SortPolynomial(Polynomial P)
 {
-    Polynomial Tmp, PolyMult = CreatePolynomial();
-    Tmp = PolyMult;
+    Polynomial Max, MaxBefore, Tmp1 = P->Next, Tmp2, TmpBefore, Before, Next;
+    int C, E;
+    MaxBefore = P;
+    Before = P;
+    while (Tmp1)
+    {
+        TmpBefore = Tmp1;
+        Max = Tmp1;
+        Tmp2 = Tmp1->Next;
+        while (Tmp2)
+        {
+            if (Tmp2->Exponent > Max->Exponent)
+            {
+                Max = Tmp2;
+                MaxBefore = TmpBefore;
+            }
+            TmpBefore = Tmp2;
+            Tmp2 = Tmp2->Next;
+        }
+        Next = Max->Next;
+        Before->Next = Max;
+        if (Tmp1->Next == Max)
+        {
+            Max->Next = Tmp1;
+        }
+        else
+        {
+            Max->Next = Tmp1->Next;
+        }
+        MaxBefore->Next = Tmp1;
+        Tmp1->Next = Next;
+        Tmp1 = Max->Next;
+        Before = Max;
+        MaxBefore = Max;
+
+        // C = Max->Coefficient;
+        // E = Max->Exponent;
+        // Max->Coefficient = Tmp1->Coefficient;
+        // Max->Exponent = Tmp1->Exponent;
+        // Tmp1->Coefficient = C;
+        // Tmp1->Exponent = E;
+        // Tmp1 = Tmp1->Next;
+    }
+}
+void MergeExponent(Polynomial P)
+{
+    Polynomial Tmp1 = P->Next, Tmp2, Before;
+    while (Tmp1)
+    {
+        Before = Tmp1;
+        Tmp2 = Tmp1->Next;
+        while (Tmp2)
+        {
+            if (Tmp1->Exponent == Tmp2->Exponent)
+            {
+                Tmp1->Coefficient += Tmp2->Coefficient;
+                Before->Next = Tmp2->Next;
+            }
+            else
+            {
+                Before = Tmp2;
+            }
+
+            Tmp2 = Tmp2->Next;
+        }
+        Tmp1 = Tmp1->Next;
+    }
+}
+Polynomial MultPolynomial(Polynomial P1, Polynomial P2)
+{
+    Polynomial TmpMult, Tmp, TmpP2 = P2->Next, PolyMult = CreatePolynomial();
+    TmpMult = PolyMult;
     P1 = P1->Next;
-    P2 = P2->Next;
+    while (P1)
+    {
+        while (TmpP2)
+        {
+            TmpMult->Next = CreatePolynomialNode(P1->Coefficient * TmpP2->Coefficient, P1->Exponent + TmpP2->Exponent);
+            TmpP2 = TmpP2->Next;
+            TmpMult = TmpMult->Next;
+        }
+        TmpP2 = P2->Next;
+        P1 = P1->Next;
+    }
+    MergeExponent(PolyMult);
+    SortPolynomial(PolyMult);
     return PolyMult;
 }
 void PrintPolynomial(Polynomial P)
@@ -108,9 +190,8 @@ int main()
     Insert(P2, CreatePolynomialNode(1, 2));
     Insert(P2, CreatePolynomialNode(2, 3));
     Insert(P2, CreatePolynomialNode(3, 5));
-    Polynomial PSum = AddPolynomial(P1, P2);
+    Polynomial PSum = AddPolynomial(P1, P2), PMult = MultPolynomial(P1, P2);
     PrintPolynomial(PSum);
-    // MultPolynomial(P1, P2, PMult);
-    // PrintPolynomial(PMult);
+    PrintPolynomial(PMult);
     return 0;
 }
