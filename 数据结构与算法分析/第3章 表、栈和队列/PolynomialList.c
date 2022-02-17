@@ -67,8 +67,13 @@ void Insert(Polynomial Poly, Polynomial P)
     P->Next = Poly->Next;
     Poly->Next = P;
 }
-void MultPolynomial(const Polynomial P1, const Polynomial P2, Polynomial PolyMult)
+void MultPolynomial(Polynomial P1, Polynomial P2)
 {
+    Polynomial Tmp, PolyMult = CreatePolynomial();
+    Tmp = PolyMult;
+    P1 = P1->Next;
+    P2 = P2->Next;
+    return PolyMult;
 }
 void PrintPolynomial(Polynomial P)
 {
