@@ -40,6 +40,14 @@ void MakeEmpty(Queue Q)
     Q->Front = 1;
     Q->Rear = 0;
 }
+void DisposeQueue(Queue Q)
+{
+    if (Q != NULL)
+    {
+        free(Q->Array);
+        free(Q);
+    }
+}
 void Enqueue(ElementType X, Queue Q)
 {
     if (IsFull(Q))
