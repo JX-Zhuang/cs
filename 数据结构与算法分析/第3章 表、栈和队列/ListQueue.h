@@ -1,8 +1,9 @@
 #ifndef _Queue_h
-
+struct QueueRecord;
+typedef struct QueueRecord *Queue;
 struct Node;
 typedef struct Node *PtrToNode;
-typedef PtrToNode Queue;
+typedef PtrToNode QueueNode;
 typedef int ElementType;
 
 int IsEmpty(Queue Q);

@@ -1,17 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ListQueue.h"
-
+struct QueueRecord
+{
+    QueueNode Front;
+    QueueNode Rear;
+};
 struct Node
 {
     PtrToNode Next;
-    PtrToNode Rear;
     ElementType Element;
 };
 
 int IsEmpty(Queue Q)
 {
-    return Q->Next == NULL;
+    return Q->Front->Next == NULL;
 }
 Queue CreateQueue()
 {
@@ -20,8 +23,8 @@ Queue CreateQueue()
     {
         //error
     }
-    Q->Next = NULL;
-    Q->Rear = Q;
+    Q->Front = Q->Rear = malloc(sizeof(struct Node));
+    Q->Front->Next = NULL;
     return Q;
 }
 void Enqueue(ElementType X, Queue Q)
@@ -32,7 +35,6 @@ void Enqueue(ElementType X, Queue Q)
         //error
     }
     Node->Element = X;
-    Node->Rear = NULL;
     Node->Next = NULL;
     Q->Rear->Next = Node;
     Q->Rear = Node;
@@ -43,20 +45,23 @@ ElementType Front(Queue Q)
     {
         //error
     }
-    return Q->Next->Element;
+    return Q->Front->Next->Element;
 }
 void Dequeue(Queue Q)
 {
-    PtrToNode Tmp;
-    if (!IsEmpty(Q))
+    if (IsEmpty(Q))
     {
-        Tmp = Q->Next;
-        Q->Next = Q->Next->Next;
-        free(Tmp);
-        if (IsEmpty(Q))
-        {
-            Q->Rear = Q;
-        }
+        //error
+        return;
+    }
+    PtrToNode Tmp, Front;
+    Front = Q->Front;
+    Tmp = Front->Next;
+    Front->Next = Front->Next->Next;
+    free(Tmp);
+    if (IsEmpty(Q))
+    {
+        Q->Rear = Front;
     }
 }
 ElementType FrontAndDequeue(Queue Q)
@@ -67,28 +72,33 @@ ElementType FrontAndDequeue(Queue Q)
 }
 void PrintQueue(Queue Q)
 {
-    Q = Q->Next;
-    while (Q)
+    QueueNode Front = Q->Front->Next;
+    while (Front)
     {
-        printf("%d\n", Q->Element);
-        Q = Q->Next;
+        printf("%d\n", Front->Element);
+        Front = Front->Next;
     }
+    printf("Print Queue Over \n");
 }
 int main()
 {
     Queue Q = CreateQueue();
     Enqueue(1, Q);
     Enqueue(2, Q);
+    PrintQueue(Q);
     Enqueue(3, Q);
     Enqueue(4, Q);
-
+    PrintQueue(Q);
     Dequeue(Q);
     Dequeue(Q);
+    PrintQueue(Q);
     Dequeue(Q);
     Dequeue(Q);
-
+    PrintQueue(Q);
     Enqueue(1, Q);
     Enqueue(2, Q);
+    Enqueue(3, Q);
+    Enqueue(4, Q);
     PrintQueue(Q);
 
     return 0;
