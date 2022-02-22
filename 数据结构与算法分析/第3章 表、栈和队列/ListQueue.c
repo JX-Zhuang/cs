@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "ListQueue.h"
 
@@ -51,11 +52,11 @@ void Dequeue(Queue Q)
     {
         Tmp = Q->Next;
         Q->Next = Q->Next->Next;
+        free(Tmp);
         if (IsEmpty(Q))
         {
-            Q->Rear = NULL;
+            Q->Rear = Q;
         }
-        free(Tmp);
     }
 }
 ElementType FrontAndDequeue(Queue Q)
@@ -63,4 +64,32 @@ ElementType FrontAndDequeue(Queue Q)
     ElementType X = Front(Q);
     Dequeue(Q);
     return X;
+}
+void PrintQueue(Queue Q)
+{
+    Q = Q->Next;
+    while (Q)
+    {
+        printf("%d\n", Q->Element);
+        Q = Q->Next;
+    }
+}
+int main()
+{
+    Queue Q = CreateQueue();
+    Enqueue(1, Q);
+    Enqueue(2, Q);
+    Enqueue(3, Q);
+    Enqueue(4, Q);
+
+    Dequeue(Q);
+    Dequeue(Q);
+    Dequeue(Q);
+    Dequeue(Q);
+
+    Enqueue(1, Q);
+    Enqueue(2, Q);
+    PrintQueue(Q);
+
+    return 0;
 }
