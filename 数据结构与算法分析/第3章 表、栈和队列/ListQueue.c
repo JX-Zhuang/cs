@@ -4,7 +4,8 @@
 struct Node
 {
     PtrToNode Next;
-    ElementType X;
+    PtrToNode Rear;
+    ElementType Element;
 };
 
 int IsEmpty(Queue Q)
@@ -19,10 +20,21 @@ Queue CreateQueue()
         //error
     }
     Q->Next = NULL;
+    Q->Rear = Q;
     return Q;
 }
 void Enqueue(ElementType X, Queue Q)
 {
+    PtrToNode Node = malloc(sizeof(struct Node));
+    if (Node == NULL)
+    {
+        //error
+    }
+    Node->Element = X;
+    Node->Rear = NULL;
+    Node->Next = NULL;
+    Q->Rear->Next = Node;
+    Q->Rear = Node;
 }
 ElementType Front(Queue Q)
 {
@@ -30,7 +42,7 @@ ElementType Front(Queue Q)
     {
         //error
     }
-    return Q->Next->X;
+    return Q->Next->Element;
 }
 void Dequeue(Queue Q)
 {
@@ -39,6 +51,10 @@ void Dequeue(Queue Q)
     {
         Tmp = Q->Next;
         Q->Next = Q->Next->Next;
+        if (IsEmpty(Q))
+        {
+            Q->Rear = NULL;
+        }
         free(Tmp);
     }
 }
