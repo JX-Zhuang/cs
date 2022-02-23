@@ -108,7 +108,34 @@ void PrintLots(List L, List P)
         }
     }
 }
-
+List Unique(List L1, List L2)
+{
+    List L = MakeEmpty(NULL);
+    Position Tmp = L,T;
+    L1 = L1->Next;
+    L2 = L2->Next;
+    while (L1 != NULL && L2 != NULL)
+    {
+        if (L1->Element == L2->Element)
+        {
+            T = malloc(sizeof(struct Node));
+            Tmp->Next = T;
+            T->Element = L1->Element;
+            Tmp = T;
+            L1 = L1->Next;
+            L2 = L2->Next;
+        }
+        else if (L1->Element > L2->Element)
+        {
+            L2 = L2->Next;
+        }
+        else
+        {
+            L1 = L1->Next;
+        }
+    }
+    return L;
+}
 int main()
 {
     List P = MakeEmpty(NULL);
@@ -122,6 +149,7 @@ int main()
     Insert(3, L, L);
     Insert(2, L, L);
     Insert(1, L, L);
-    PrintLots(L, P); // 3 4 6
+    List nL = Unique(L, P);
+    PrintList(nL);
     return 0;
 }
