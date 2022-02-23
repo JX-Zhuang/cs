@@ -80,21 +80,48 @@ List MakeEmpty(List L)
     L->Next = NULL;
     return L;
 }
+void PrintLots(List L, List P)
+{
+    int i = 0;
+    P = P->Next;
+    L = L->Next;
+    while (P != NULL && L != NULL)
+    {
+        if (P->Element < 0)
+        {
+            P = P->Next;
+            continue;
+        }
+        if (P->Element == i)
+        {
+            printf("%d\n", L->Element);
+            P = P->Next;
+        }
+        else if (P->Element > i)
+        {
+            L = L->Next;
+            i++;
+        }
+        else
+        {
+            P = P->Next;
+        }
+    }
+}
+
 int main()
 {
+    List P = MakeEmpty(NULL);
+    Insert(6, P, P);
+    Insert(4, P, P);
+    Insert(3, P, P);
+    Insert(1, P, P);
     List L = MakeEmpty(NULL);
-    Insert(1, L, L);
-    Insert(2, L, L);
-    Insert(3, L, L);
-    Insert(4, L, L);
     Insert(5, L, L);
-    Delete(3, L);
-    PrintList(L);
-    Position P = Find(2, L);
-    if (P != NULL)
-    {
-        P->Element = 222;
-    }
-    PrintList(L);
+    Insert(4, L, L);
+    Insert(3, L, L);
+    Insert(2, L, L);
+    Insert(1, L, L);
+    PrintLots(L, P); // 3 4 6
     return 0;
 }
