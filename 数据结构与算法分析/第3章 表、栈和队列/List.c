@@ -162,19 +162,43 @@ List Union(List L1, List L2)
     Tmp->Next = L1 ? L1 : L2;
     return L;
 }
+int Josphus(List L, int M)
+{
+    int i = 1;
+    Position Prev = L;
+    L = L->Next;
+    return i;
+}
+void ReverseList(List L)
+{
+    Position Current = L->Next, Next;
+    L->Next = NULL;
+    while (Current)
+    {
+        Next = Current->Next;
+        Current->Next = L->Next;
+        L->Next = Current;
+        Current = Next;
+    }
+}
 int main()
 {
     List P = MakeEmpty(NULL);
-    Insert(6, P, P);
-    Insert(4, P, P);
-    Insert(3, P, P);
-    Insert(1, P, P);
+    // Insert(6, P, P);
+    // Insert(4, P, P);
+    // Insert(3, P, P);
+    // Insert(1, P, P);
     List L = MakeEmpty(NULL);
     Insert(5, L, L);
     Insert(4, L, L);
     Insert(3, L, L);
     Insert(2, L, L);
     Insert(1, L, L);
-    PrintList(Union(L,P));
+    PrintList(L);
+    ReverseList(L);
+    printf("Reverse\n");
+    PrintList(L);
+    PrintList(P);
+    // PrintList(Union(L, P));
     return 0;
 }
