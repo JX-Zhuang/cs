@@ -171,15 +171,15 @@ int Josphus(List L, int M)
 }
 void ReverseList(List L)
 {
-    Position Current = L->Next, Next;
-    L->Next = NULL;
+    Position Prev = NULL, Next = NULL, Current = L->Next;
     while (Current)
     {
         Next = Current->Next;
-        Current->Next = L->Next;
-        L->Next = Current;
+        Current->Next = Prev;
+        Prev = Current;
         Current = Next;
     }
+    L->Next = Prev;
 }
 int main()
 {
