@@ -22,7 +22,7 @@ Deque CreateDeque(int Size)
         //error
     }
     D->Front = D->Rear = 0;
-    D->Capacity = Size;
+    D->Capacity = Size + 1;
     return D;
 }
 //把X插入D的前端
