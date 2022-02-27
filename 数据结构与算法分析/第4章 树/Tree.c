@@ -49,3 +49,32 @@ Position FindMax(SearchTree T)
         return T;
     return FindMax(T->Right);
 }
+
+SearchTree Insert(ElementType X, SearchTree T)
+{
+    if (T == NULL)
+    {
+        T = malloc(sizeof(struct TreeNode));
+        if (T == NULL)
+        {
+            //error
+        }
+        else
+        {
+            T->Element = X;
+            T->Right = T->Left = NULL;
+        }
+    }
+    else
+    {
+        if (X > T->Element)
+        {
+            T->Right = Insert(X, T->Right);
+        }
+        else if (X < T->Element)
+        {
+            T->Left = Insert(X, T->Left);
+        }
+    }
+    return T;
+}
