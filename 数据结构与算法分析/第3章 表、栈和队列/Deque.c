@@ -29,7 +29,6 @@ Deque CreateDeque(int Size)
 void Push(ElementType X, Deque D)
 {
     if (IsFull(D))
-    
     {
     }
     else
