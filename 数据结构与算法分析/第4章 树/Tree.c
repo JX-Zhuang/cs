@@ -78,3 +78,43 @@ SearchTree Insert(ElementType X, SearchTree T)
     }
     return T;
 }
+
+SearchTree Delete(ElementType X, SearchTree T)
+{
+    Position Tmp;
+    if (T == NULL)
+    {
+        //error
+    }
+    else if (X > T->Element)
+    {
+        T->Right = Delete(X, T->Right);
+    }
+    else if (X < T->Element)
+    {
+        T->Left = Delete(X, T->Left);
+    }
+    else
+    {
+        if (T->Left && T->Right)
+        {
+            Tmp = FindMin(T->Right);
+            T->Element = Tmp->Element;
+            T->Right = Delete(T->Element, T->Right);
+        }
+        else
+        {
+            Tmp = T;
+            if (T->Left == NULL)
+            {
+                T = T->Right;
+            }
+            else if (T->Right == NULL)
+            {
+                T = T->Left;
+            }
+            free(Tmp);
+        }
+    }
+    return T;
+}
