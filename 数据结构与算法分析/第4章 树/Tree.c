@@ -117,4 +117,5 @@ SearchTree Delete(ElementType X, SearchTree T)
         }
     }
     return T;
+    
 }
