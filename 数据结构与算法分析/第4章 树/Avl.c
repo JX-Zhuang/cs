@@ -48,6 +48,41 @@ static Position DoubleRoateWithRight(Position K3)
     K3->Right = SingleRotateWithLeft(K3->Right);
     return SingleRotateWithRight(K3);
 }
+AvlTree MakeEmpty(AvlTree T)
+{
+    if (T != NULL)
+    {
+        MakeEmpty(T->Left);
+        MakeEmpty(T->Right);
+        free(T);
+    }
+    return NULL;
+}
+Position Find(ElementType X, AvlTree T)
+{
+    if (T == NULL)
+        return T;
+    if (X > T->Element)
+        return Find(X, T->Right);
+    if (X < T->Element)
+        return Find(X, T->Left);
+    return T;
+}
+Position FindMin(AvlTree T)
+{
+    if (T == NULL)
+        return NULL;
+    if (T->Left == NULL)
+        return T;
+    return FindMin(T->Left);
+}
+Position FindMax(AvlTree T)
+{
+    if (T != NULL)
+        while (T->Right != NULL)
+            T = T->Right;
+    return T;
+}
 AvlTree Insert(ElementType X, AvlTree T)
 {
     if (T == NULL)

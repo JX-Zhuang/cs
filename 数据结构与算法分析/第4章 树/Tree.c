@@ -33,7 +33,7 @@ Position Find(ElementType X, SearchTree T)
 
 Position FindMin(SearchTree T)
 {
-    if (T == NULL)
+    if (T != NULL)
         while (T->Left != NULL)
         {
             T = T->Left;
@@ -117,5 +117,4 @@ SearchTree Delete(ElementType X, SearchTree T)
         }
     }
     return T;
-    
 }
