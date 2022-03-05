@@ -1,16 +1,16 @@
 #ifndef _AvlTree_H
 
 struct AvlNode;
-typedef struct AvlNode *Postion;
+typedef struct AvlNode *Position;
 typedef struct AvlNode *AvlTree;
 typedef int ElementType;
 
 AvlTree MakeEmpty(AvlTree T);
-Postion Find(ElementType X, AvlTree T);
-Postion FindMin(AvlTree T);
-Postion FindMax(AvlTree T);
+Position Find(ElementType X, AvlTree T);
+Position FindMin(AvlTree T);
+Position FindMax(AvlTree T);
 AvlTree Insert(ElementType X, AvlTree T);
 AvlTree Delete(ElementType X, AvlTree T);
-ElementType Retrieve(Postion P);
+ElementType Retrieve(Position P);
 
 #endif /* _AvlTree_H */
