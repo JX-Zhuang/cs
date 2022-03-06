@@ -48,6 +48,40 @@ static Position DoubleRoateWithRight(Position K3)
     K3->Right = SingleRotateWithLeft(K3->Right);
     return SingleRotateWithRight(K3);
 }
+static Position Rotate(Position P)
+{
+    if (P == NULL)
+        return P;
+    if (Height(P->Left) - Height(P->Right) == 2)
+    {
+        if (P->Left)
+        {
+            if (Height(P->Left->Left) > Height(P->Left->Right))
+            {
+                P = SingleRotateWithLeft(P);
+            }
+            else
+            {
+                P = DoubleRotateWithLeft(P);
+            }
+        }
+    }
+    else if (Height(P->Right) - Height(P->Left) == 2)
+    {
+        if (P->Right)
+        {
+            if (Height(P->Right->Right) > Height(P->Right->Left))
+            {
+                P = SingleRotateWithRight(P);
+            }
+            else
+            {
+                P = DoubleRoateWithRight(P);
+            }
+        }
+    }
+    return P;
+}
 AvlTree MakeEmpty(AvlTree T)
 {
     if (T != NULL)
@@ -146,6 +180,11 @@ AvlTree Delete(ElementType X, AvlTree T)
                 T = T->Left;
             free(Tmp);
         }
+    }
+    if (T != NULL)
+    {
+        T->Height = Max(Height(T->Left), Height(T->Right)) + 1;
+        T = Rotate(T);
     }
     return T;
 }
