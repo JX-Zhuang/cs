@@ -120,3 +120,32 @@ AvlTree Insert(ElementType X, AvlTree T)
     T->Height = Max(Height(T->Left), Height(T->Right)) + 1;
     return T;
 }
+AvlTree Delete(ElementType X, AvlTree T)
+{
+    Position Tmp;
+    if (T == NULL)
+        return T;
+    if (T->Element > X)
+        T->Left = Delete(X, T->Left);
+    else if (T->Element < X)
+        T->Right = Delete(X, T->Right);
+    else
+    {
+        if (T->Left && T->Right)
+        {
+            Tmp = FindMin(T->Right);
+            T->Element = Tmp->Element;
+            T->Right = Delete(T->Element, T->Right);
+        }
+        else
+        {
+            Tmp = T;
+            if (T->Left == NULL)
+                T = T->Right;
+            else if (T->Right == NULL)
+                T = T->Left;
+            free(Tmp);
+        }
+    }
+    return T;
+}
