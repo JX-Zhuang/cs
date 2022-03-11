@@ -43,3 +43,6 @@ HashTable InitializeTable(int TableSize)
         }
     }
 }
+Position Find(ElementType Key, HashTable H){
+    
+}
