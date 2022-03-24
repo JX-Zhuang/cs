@@ -7,7 +7,7 @@ void Qsort(ElementType A[], int Left, int Right)
 {
     int i, j;
     ElementType Pivot = A[(Left + Right) / 2];
-
+    
     Qsort(A, Left, i - 1);
     Qsort(A, i + 1, Right);
 }
