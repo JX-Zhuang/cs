@@ -10,20 +10,15 @@ int Partition(ElementType A[], int Left, int Right)
 {
     ElementType Pivot = A[Left];
     int i = Left + 1, j = Right;
-    while (i < j)
+    while (1)
     {
         while (A[i] <= Pivot && i <= j)
-        {
             i++;
-        }
         while (A[j] >= Pivot && i <= j)
-        {
             j--;
-        }
-        if (i < j)
-        {
-            Swap(&A[i], &A[j]);
-        }
+        if (i >= j)
+            break;
+        Swap(&A[i], &A[j]);
     }
     Swap(&A[Left], &A[j]);
     return j;
