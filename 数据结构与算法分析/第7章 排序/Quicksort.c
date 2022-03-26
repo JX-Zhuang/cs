@@ -35,6 +35,7 @@ void Quicksort(ElementType A[], int N)
 {
     Qsort(A, 0, N - 1);
 }
+
 int main()
 {
     ElementType A[] = {6, 7, 3, 2, 5, 6, 8, 10, 4, 9, 1, 6};
