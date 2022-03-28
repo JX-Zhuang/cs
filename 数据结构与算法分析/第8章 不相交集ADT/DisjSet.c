@@ -16,5 +16,5 @@ SetType Find(ElementType X, DisjSet S)
     {
         return X;
     }
-    return Find(S[X], S);
+    return S[X] = Find(S[X], S);
 }
